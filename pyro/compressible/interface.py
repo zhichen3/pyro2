@@ -81,7 +81,7 @@ def states(idir, ng, dx, dt,
     qv : ndarray
         The primitive state vector
     dqv : ndarray
-        Spatial derivitive of the state vector
+        Spatial derivative of the state vector
 
     Returns
     -------
@@ -804,7 +804,7 @@ def riemann_prim(idir, ng,
 @njit(cache=True)
 def riemann_hllc(idir, ng,
                  idens, ixmom, iymom, iener, irhoX, nspec,
-                 lower_solid, upper_solid,
+                 lower_solid, upper_solid,  # pylint: disable=unused-argument
                  gamma, U_l, U_r):
     r"""
     This is the HLLC Riemann solver.  The implementation follows
@@ -1121,7 +1121,7 @@ def consFlux(idir, gamma, idens, ixmom, iymom, iener, irhoX, nspec, U_state):
 def artificial_viscosity(ng, dx, dy,
                          cvisc, u, v):
     r"""
-    Compute the artifical viscosity.  Here, we compute edge-centered
+    Compute the artificial viscosity.  Here, we compute edge-centered
     approximations to the divergence of the velocity.  This follows
     directly Colella \ Woodward (1984) Eq. 4.5
 

@@ -47,7 +47,7 @@ class Variables:
             self.ix = -1
 
 
-def cons_to_prim(U, g, ivars, myg):
+def cons_to_prim(U, ivars, myg):
     """
     Convert an input vector of conserved variables
     :math:`U = (h, hu, hv, {hX})`
@@ -68,7 +68,7 @@ def cons_to_prim(U, g, ivars, myg):
     return q
 
 
-def prim_to_cons(q, g, ivars, myg):
+def prim_to_cons(q, ivars, myg):
     """
     Convert an input vector of primitive variables :math:`q = (h, u, v, {X})`
     to conserved variables :math:`U = (h, hu, hv, {hX})`
@@ -119,7 +119,7 @@ class Simulation(NullSimulation):
             for v in extra_vars:
                 my_data.register_var(v, bc)
 
-        # store the gravitational acceration g as an auxillary quantity
+        # store the gravitational acceration g as an auxiliary quantity
         # so we can have a
         # self-contained object stored in output files to make plots.
         # store grav because we'll need that in some BCs
@@ -134,7 +134,7 @@ class Simulation(NullSimulation):
             particle_generator = self.rp.get_param("particles.particle_generator")
             self.particles = particles.Particles(self.cc_data, bc, n_particles, particle_generator)
 
-        # some auxillary data that we'll need to fill GC in, but isn't
+        # some auxiliary data that we'll need to fill GC in, but isn't
         # really part of the main solution
         aux_data = self.data_class(my_grid)
         aux_data.register_var("ymom_src", bc_yodd)
@@ -186,8 +186,8 @@ class Simulation(NullSimulation):
 
         myg = self.cc_data.grid
 
-        Flux_x, Flux_y = flx.unsplit_fluxes(self.cc_data, self.aux_data, self.rp,
-                                            self.ivars, self.solid, self.tc, self.dt)
+        Flux_x, Flux_y = flx.unsplit_fluxes(self.cc_data, self.rp, self.ivars,
+                                            self.solid, self.tc, self.dt)
 
         # conservative update
         dtdx = self.dt/myg.dx
@@ -222,11 +222,7 @@ class Simulation(NullSimulation):
         # we are plotting from a file
         ivars = Variables(self.cc_data)
 
-        # access g from the cc_data object so we can use dovis
-        # outside of a running simulation.
-        g = self.cc_data.get_aux("g")
-
-        q = cons_to_prim(self.cc_data.data, g, ivars, self.cc_data.grid)
+        q = cons_to_prim(self.cc_data.data, ivars, self.cc_data.grid)
 
         h = q[:, :, ivars.ih]
         u = q[:, :, ivars.iu]

@@ -1,10 +1,10 @@
-Multigrid solvers
-=================
+Multigrid Class Overview
+========================
 
 pyro solves elliptic problems (like Laplace's equation or Poisson's
 equation) through multigrid. This accelerates the convergence of
 simple relaxation by moving the solution down and up through a series
-of grids. Chapter 9 of the `pdf notes <http://bender.astro.sunysb.edu/hydro_by_example/CompHydroTutorial.pdf>`_ gives an introduction to solving elliptic equations, including multigrid.
+of grids. Chapter 9 of the `pdf notes <http://open-astrophysics-bookshelf.github.io/numerical_exercises/CompHydroTutorial.pdf>`_ gives an introduction to solving elliptic equations, including multigrid.
 
 There are three solvers:
 
@@ -30,8 +30,8 @@ there is no time-dependence in pure elliptic problems. Instead, there
 are a few scripts in the multigrid/ subdirectory that demonstrate its
 use.
 
-Examples
---------
+Simple Examples
+---------------
 
 multigrid test
 ^^^^^^^^^^^^^^
@@ -123,21 +123,3 @@ results are shown below:
 Left is the original u velocity, middle is the modified field after adding the gradient of the scalar, and right is the recovered field.
 
 
-Exercises
----------
-
-Explorations
-^^^^^^^^^^^^
-
-* Try doing just smoothing, no multigrid. Show that it still converges
-  second order if you use enough iterations, but that the amount of
-  time needed to get a solution is much greater.
-
-Extensions
-^^^^^^^^^^
-
-* Implement inhomogeneous dirichlet boundary conditions
-
-* Add a different bottom solver to the multigrid algorithm
-
-* Make the multigrid solver work for non-square domains

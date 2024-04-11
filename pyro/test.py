@@ -97,6 +97,7 @@ def do_tests(out_file,
     tests.append(PyroTest("advection_rk", "smooth", "inputs.smooth", opts))
     tests.append(PyroTest("advection_fv4",
                           "smooth", "inputs.smooth", opts))
+    tests.append(PyroTest("burgers", "test", "inputs.test", opts))
     tests.append(PyroTest("compressible", "quad", "inputs.quad", opts))
     tests.append(PyroTest("compressible", "sod", "inputs.sod.x", opts))
     tests.append(PyroTest("compressible", "rt", "inputs.rt", opts))
@@ -108,6 +109,7 @@ def do_tests(out_file,
     tests.append(PyroTest("diffusion", "gaussian",
                           "inputs.gaussian", opts))
     tests.append(PyroTest("incompressible", "shear", "inputs.shear", opts))
+    tests.append(PyroTest("incompressible_viscous", "cavity", "inputs.cavity", opts))
     tests.append(PyroTest("lm_atm", "bubble", "inputs.bubble", opts))
     tests.append(PyroTest("swe", "dam", "inputs.dam.x", opts))
 

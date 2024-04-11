@@ -83,14 +83,14 @@ https://python-hydro.github.io/pyro2
       ```python
       import matplotlib.pyplot
       print matplotlib.pyplot.get_backend()
-       ```
+      ```
 
  - If you want to run the unit tests, you need to have `pytest` installed.
 
  - Finally, you can run a quick test of the advection solver:
 
    ```
-   pyro-sim.py advection smooth inputs.smooth
+   pyro_sim.py advection smooth inputs.smooth
    ```
 
    you should see a graphing window pop up with a smooth pulse
@@ -102,13 +102,13 @@ https://python-hydro.github.io/pyro2
 The main data structures that describe the grid and the data the lives
 on the grid are described in a jupyter notebook:
 
-https://github.com/python-hydro/pyro2/blob/main/mesh/mesh-examples.ipynb
+https://github.com/python-hydro/pyro2/blob/main/pyro/mesh/mesh-examples.ipynb
 
 
-Many of the methods here rely on multigrid.  The multigrid solver is
+Many of the methods here rely on multigrid.  The basic multigrid solver is
 demonstrated in the juputer notebook:
 
-https://github.com/python-hydro/pyro2/blob/main/multigrid/multigrid-examples.ipynb
+https://github.com/python-hydro/pyro2/blob/main/pyro/multigrid/multigrid-constant-coefficients.ipynb
 
 
 ## Solvers
@@ -132,10 +132,16 @@ pyro provides the following solvers (all in 2-d):
   - `advection_weno`: a method-of-lines WENO solver for linear
     advection.
 
+  - `burgers`: a second-order unsplit solver for invsicid Burgers' equation.
+
+  - `viscous_burgers`: a second-order unsplit solver for viscous Burgers' equation
+    with constant-coefficient diffusion. It uses Crank-Nicolson time-discretized
+    solver for solving diffusion.
+
   - `compressible`: a second-order unsplit solver for the Euler
     equations of compressible hydrodynamics.  This uses characteristic
-	tracing and corner coupling for the prediction of the interface
-	states and a 2-shock or HLLC approximate Riemann solver.
+    tracing and corner coupling for the prediction of the interface
+    states and a 2-shock or HLLC approximate Riemann solver.
 
   - `compressible_fv4`: a fourth-order accurate finite-volume compressible
      hydro solver that uses RK4 time integration.  This is built from the
@@ -143,7 +149,7 @@ pyro provides the following solvers (all in 2-d):
 
   - `compressible_rk`: a second-order unsplit solver for Euler
      equations that uses Runge-Kutta integration instead of
-	 characteristic tracing.
+     characteristic tracing.
 
   - `compressible_sdc`: a fourth-order compressible solver,
      using spectral-deferred correction (SDC) for the time integration.
@@ -154,6 +160,9 @@ pyro provides the following solvers (all in 2-d):
   - `incompressible`: a second-order cell-centered approximate
     projection method for the incompressible equations of
     hydrodynamics.
+
+  - `incompressible_viscous`: an extension of the incompressible solver
+    including a diffusion term for viscosity.
 
   - `lm_atm`: a solver for the equations of low Mach number
     hydrodynamics for atmospheric flows.
@@ -242,7 +251,7 @@ with their data.
   There is a set of notes that describe the background and details of the
   algorithms that pyro implements:
 
-  http://bender.astro.sunysb.edu/hydro_by_example/CompHydroTutorial.pdf
+  http://open-astrophysics-bookshelf.github.io/numerical_exercises/
 
   The source for these notes is also available on github:
 
