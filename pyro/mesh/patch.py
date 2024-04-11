@@ -890,12 +890,14 @@ class PolarGrid(Grid2d):
     the 2-d grid class.  The grid object will contain the coordinate
     information (at various centerings).
 
+    We use x to represent r-direction and y to represent theta-direction
+
     A basic representation of the layout is::
 
               *---* \theta_{i+1/2}
-             /    | 
+             /    |
             /     |
-           /      * \theta_i 
+           /      * \theta_i
           /       |
          /        |
         *____*____* \theta_{i-1/2}
@@ -908,20 +910,22 @@ r_{i-1/2}   r_i   r_{i+1/2}
 
     def area_x(self):
         """
-        Return an array of the face areas. 
+        Return an array of the face areas thats points
+        in the x-direction, or r-direction.
         The shape of the returned array is (ni, nj).
         """
         r1, t1 = np.meshgrid(self.xr, self.yr)
         r0, t0 = np.meshgrid(self.xl, self.yl)
 
-        # ** this is just 1/2*r*d\theta
+        # ** this is just r*d\theta
 
-        area = 0.5 * r0 * (t1 - t0)
+        area = r0 * (t1 - t0)
         return area
 
     def area_y(self):
         """
-        Return an array of the face areas. 
+        Return an array of the face areas that points
+        in the y-direction, or theta-direction.
         The shape of the returned array is (ni, nj).
         """
         r1, t1 = np.meshgrid(self.xr, self.yr)

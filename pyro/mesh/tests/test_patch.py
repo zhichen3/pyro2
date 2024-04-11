@@ -307,11 +307,11 @@ class TestPolarGrid(object):
 
     def test_area_x(self):
         A = self.g.area_x()
-        assert A[0,0] == (self.g.yr[0] - self.g.yl[0]) * (self.g.xr[0] - self.g.xl[0]) * 0.5
+        assert A[0,0] == (self.g.yr[0] - self.g.yl[0]) * self.g.xl[0]
 
     def test_area_y(self):
         A = self.g.area_y()
-        assert A[0] == (self.g.xr - self.g.xl)
+        assert A[0,0] == (self.g.xr[0] - self.g.xl[0])
 
     def test_cell_volumes(self):
         V = self.g.cell_volumes()
